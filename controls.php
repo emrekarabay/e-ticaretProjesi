@@ -94,7 +94,7 @@ if(isset($_POST["logOut"])){
 
 
     $sorguUsers = $conn->prepare("UPDATE users SET lastLoginDate = ? WHERE id=?");
-    $sorguUsers3 = $conn->query(" DELETE FROM card");
+//    $sorguUsers3 = $conn->query(" DELETE FROM card");
     if($sorguUsers){
         date_default_timezone_set('Europe/Istanbul');
         $LastLoginDate = date("d-m-Y H:i:s");
@@ -119,6 +119,10 @@ if(isset($_POST["addToCard"])){
     $sorguUsers ->execute([$usersListele["title"],$usersListele["photoUrl"],$usersListele['price'] - (($usersListele['price'] * $usersListele2["discountRate"])/100),$_SESSION["id"],$_POST["addToCard"]]);
     header('Location: ./letgo.php');
 }
+if(isset($_POST["odemeYap"])){
+    header('Location: ./odeme.php');
+}
+
 if(isset($_POST["satinAlindi"])){
     $sorguUsers = $conn-> prepare(" select * from card");
     $sorguUsers -> execute();
@@ -141,7 +145,8 @@ if(isset($_POST["satinAlindi"])){
     }
 
 
-    $sorguUsers3 = $conn->query(" DELETE FROM card");
+    $sorguUsers3 = $conn->prepare(" DELETE FROM card where whoBuy=?");
+    $sorguUsers3 ->execute([$_SESSION['id']]);
     header('Location: ./siparisler.php');
 }
 if(isset($_POST["cardSil"])){

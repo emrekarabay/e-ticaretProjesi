@@ -14,8 +14,8 @@
 </div>
 <?php
 
-$sorguUsers = $conn-> query(" select * from card");
-$sorguUsers -> execute();
+$sorguUsers = $conn-> prepare(" select * from card where whobuy=?");
+$sorguUsers -> execute([$_SESSION['id']]);
 $usersListele2 = $sorguUsers ->fetchAll();
 $row = $sorguUsers -> rowCount();
 
@@ -48,7 +48,7 @@ foreach ($usersListele2 as $user) {
     <div class="row m-3">
         <div class="text-end">
             <form method="post" action="./controls.php">
-                <button type="submit" class="btn btn-primary" name="satinAlindi" value="<?php echo $user['id']; ?>">Satın Al</button>
+                <button type="submit" class="btn btn-primary" name="odemeYap" value="">Ödeme Yap</button>
             </form>
         </div>
     </div>

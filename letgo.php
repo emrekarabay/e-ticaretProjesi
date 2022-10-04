@@ -15,6 +15,7 @@
     </style>
 </head>
 <body>
+
 <?php require "HTML/navbar.php"?>
 
 <!-- İçerik Başlangıç -->
@@ -39,26 +40,47 @@
     foreach ($usersListele3 as $oylama) {
         $top += $oylama["score"];
 
-    }if($kisiSayisi != 0) {
+    }
+        $kalan = 0;
+    if($kisiSayisi != 0) {
         $oylamaOrt = $top / $kisiSayisi;
+
+        $kalan = $oylamaOrt - floor($oylamaOrt);
+        $yildizSayisi = 0;
+        $check = 1;
     }else{
         $oylamaOrt = 0;
         $kisiSayisi = 0;
+        $check =0;
     }
     ?>
         <div class="col-4 mt-3 ">
             <div class="card mx-auto" style="width: 18rem;">
                 <img src="<?php echo $user["photoUrl"] ?>" class="card-img-top" alt="..." height="200px" width="200px">
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $user['title']; ?></h5>
+                    <h5 class="card-title"><?php echo $user['title'];?></h5>
                     <h5 class="card-text "><?php echo $user['price'] . " TL yerine " . ($user['price'] - (($user['price'] * $usersListele2["discountRate"])/100)) . " TL "; ?></h5>
                     <p class="card-title"><?php echo $user['stock'] . " adet stokta"; ?></p>
                     <?php for ($i=0;$i < 5;$i++){
-                        if($i<floor($oylamaOrt)){ ?>
+                        if($i<floor($oylamaOrt) && $check == 1){ ?>
                         <span class="fa fa-star checked"></span>
-                    <?php }else{ ?>
-                            <span class="fa fa-star"></span>
-                        <?php  } } echo "(" . $kisiSayisi . ") " ?>
+                    <?php $yildizSayisi++; }}
+                    if($kalan >= 0.25 && $kalan < 0.75  && $check == 1){ ?>
+                        <span class="fa fa-star-half-o checked"></span>
+                    <?php $yildizSayisi++;  }
+                    if($kalan >= 0.75  && $check == 1){ ?>
+                        <span class="fa fa-star checked"></span>
+                    <?php  $yildizSayisi++;}
+                    if( $check == 1){
+                        for($i=$yildizSayisi;$i < 5;$i++) {?>
+                        <span class="fa fa-star "></span>
+                   <?php }}
+
+                    if($oylamaOrt == 0  && $check == 0){
+                        for($i=0;$i < 5;$i++) {?>
+                            <span class="fa fa-star "></span>
+                        <?php } }
+                    echo "(" . $kisiSayisi . ") " ?>
                     <form class="mt-3" method="post" action="./controls.php">
                         <button type="submit" class="btn btn-primary" name="addToCard" value="<?php echo $user['id']; ?>">Sepete Ekle</button>
                     </form>

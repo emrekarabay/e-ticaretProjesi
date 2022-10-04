@@ -1,6 +1,6 @@
-<nav class="navbar navbar-expand-lg bg-light">
+<nav class="navbar navbar-expand-lg bg-light ms-auto">
     <div class="container-fluid">
-        <div class="navbar-text">
+        <div class="navbar-text text-center">
             <?php
             if(isset($_SESSION['id'])){
                 if($_SESSION['adminLevel'] == "0" and $_SESSION['authLevel'] == "1"){
@@ -28,10 +28,12 @@
                             <a class="nav-link" href="../editProfile.php">Profili Düzenle</a>
                         </li>
                     </ul>
+
                     <span class="text-end">
                         <form class="" method="post" action="../controls.php">
                             <input class="btn btn-danger " type="submit" name="logOut" value="Log Out">
                         </form>
+
                     </span>
                 </div>
 
@@ -53,6 +55,7 @@
                         <form class="" method="post" action="../controls.php">
                             <input class="btn btn-danger " type="submit" name="logOut" value="Log Out">
                         </form>
+
                     </span>
                     </div>
             <?php }else{ ?>
@@ -60,10 +63,15 @@
                         <form class="" method="post" action="../controls.php">
                             <input class="btn btn-danger " type="submit" name="logOut" value="Log Out">
                         </form>
+
                     </span>
 
+
                 <?php }
-            } ?>
+            }else{ ?>
+                <span class="navbar-text">
+                </span>
+           <?php } ?>
            <?php  ?>
         </div>
     </div>
