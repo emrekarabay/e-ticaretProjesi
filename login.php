@@ -16,7 +16,16 @@
             <div></div>
             <img src="Photos/background.svg" width="300px" height="300px" class="ms-5" alt="bg">
         </div>
-        <div class="col-7">
+        <div class="col-7 mt-3">
+            <?php if(isset($_GET["hata"])) {
+                    if($_GET["hata"]== "yes"){
+                ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Username or password is wrong
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+                </div>
+            <?php }}?>
             <form class="ms-1 me-3 mt-3" method="POST" action="controls.php">
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" name="username" placeholder="name@example.com" required>

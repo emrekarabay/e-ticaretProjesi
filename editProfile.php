@@ -33,16 +33,37 @@
             <label for="formFile" class="form-label">Lütfen Resim Seçiniz!</label>
             <input class="form-control" type="file" id="formFile" name="newPhoto">
         </div>
+        <div>
+        <h5>Adreslerim</h5>
+        <?php
+        $sorguUsers2 = $conn-> prepare(" select * from useradress  WHERE whoUser=?");
+        $sorguUsers2 -> execute([$_SESSION['id']]);
+        $usersListele2 = $sorguUsers2 -> fetchAll();
+        $i=1;
+        foreach ($usersListele2 as $user) { ?>
+            <div class="mb-3">
+                <?php echo $i . " - " . $user["adress"] ?>
 
-        <input class="btn btn-primary" type="submit" name="newUpdate" value="Update">
+            </div>
+
+            <?php $i++;} ?>
+
+        </div>
+        <label for="exampleFormControlTextarea1">Adres Ekle</label>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="adress"></textarea>
+
+        <input class="btn btn-primary mt-3" type="submit" name="newUpdate" value="Update">
 
     </form>
+
+
+
+
+
 </div>
 <div>
     <?php require "HTML/footer.php"?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -11,7 +11,7 @@
 <body>
 
 <div><?php require "HTML/navbar.php"?></div>
-<div>
+<div class="">
     <form method="post" action="controls.php">
         <div class="form-floating m-3" style="text-indent: 10px;">
             <input type="password" class="form-control" name="activationCode" placeholder="Activation Code">

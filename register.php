@@ -10,7 +10,25 @@
 <div>
     <?php require "HTML/navbar.php"?>
 </div>
-<div>
+<div class="m-3">
+    <?php if(isset($_GET["hataPassword"])) {
+        if($_GET["hataPassword"]== "yes"){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Please enter the same passwords!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+            </div>
+        <?php }}?>
+    <?php if(isset($_GET["hataUsername"])) {
+        if($_GET["hataUsername"]== "yes"){
+            ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                Please choose another username!!
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+
+            </div>
+        <?php }}?>
     <form method="post" action="controls.php">
         <div class="row mt-3 ms-3 me-3">
             <div class="input-group mb-3" >

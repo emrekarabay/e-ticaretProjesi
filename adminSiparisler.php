@@ -16,6 +16,7 @@
             <th scope="col">Kullanıcı ID</th>
             <th scope="col">Ürün Resmi</th>
             <th scope="col">Ürün Adı</th>
+            <th scope="col">Ürün Adeti</th>
             <th scope="col">Ödenen ücret</th>
             <th scope="col">Durumu</th>
             <th scope="col">Tarih</th>
@@ -33,7 +34,8 @@
                 <td><?php echo $user['whoBuy']?></td>
                 <td><img width="50px" height="50px" src='<?php echo $user["photoUrl"]; ?>'></td>
                 <td><?php echo $user['title']?></td>
-                <td><?php echo $user['price']. " TL" ?></td>
+                <td><?php echo $user['kacAdetUrun']?></td>
+                <td><?php echo $user['kacAdetUrun']*$user['price']. " TL" ?></td>
                 <td><form method="post" action="./controls.php">
                     <input type="hidden" name="id" value="<?php echo $user['id']?>">
                     <div class="form-floating">

@@ -1,4 +1,3 @@
-
 <?php require "sessionControl.php" ?>
 <!doctype html>
 <html lang="en">
@@ -15,14 +14,11 @@
         <thead>
         <tr>
             <th scope="col">ID</th>
-            <th scope="col">Username</th>
-            <th scope="col">Password</th>
-            <th scope="col">Auth Level</th>
+            <th scope="col">Title</th>
             <th scope="col">Photo</th>
-            <th scope="col">Admin Level</th>
+            <th scope="col">Price</th>
+            <th scope="col">Stock</th>
             <th scope="col">Edit</th>
-            <th scope="col">Discount Rate</th>
-            <th scope="col">Last Log Out Date</th>
 
         </tr>
         </thead>
@@ -30,22 +26,20 @@
         <tbody class="table-group-divider">
         <!-- Admin Tablo Verileri Veritabanından Alma Başlangıç -->
         <?php
-        $sorguUsers = $conn->query(" select * from users ");
-        $usersListele = $sorguUsers -> fetchall();
-        foreach ($usersListele as $user) { ?>
+        $sorguLetgo = $conn->query(" select * from letgo ");
+        $letgoListele = $sorguLetgo -> fetchall();
+        foreach ($letgoListele as $letgo) { ?>
         <tr>
             <form method="POST" action="controls.php">
-                <td><input type="hidden" name="id" value="<?php echo $user['id']?>"><?php echo $user['id']?></td>
-                <td><input type="text" name="username" value="<?php echo $user['username']?>"></td>
-                <td><input type="text" name="password" value="<?php echo $user['password']?>"></td>
-                <td><input type="text" name="authLevel" value="<?php echo $user['authLevel']?>"></td>
-                <td><img width="50px" height="50px" src='<?php echo $user["photoAdress"]; ?>'></td>
-                <td><input type="text" name="adminLevel" value="<?php echo $user['adminLevel']?>"></td>
-                <td><input class="btn btn-primary" type="submit" name="updateAdminPanel" value="Update">
-                    <input class="btn btn-danger" type="submit" name="delete" value="Delete"></td>
-                <td><input type="text" name="discountRate" value="<?php echo $user['discountRate']?>"></td>
-                <td><?php echo $user["lastLoginDate"]; ?></td>
+                <td><input type="hidden" name="id" value="<?php echo $letgo['id']?>"><?php echo $letgo['id']?></td>
+                <td><input type="text" name="title" value="<?php echo $letgo['title']?>"></td>
+                <td><img width="50px" height="50px" src='<?php echo $letgo["photoUrl"]; ?>'></td>
+                <td><input type="text" name="price" value="<?php echo $letgo['price']?>"></td>
+                <td><input type="text" name="stock" value="<?php echo $letgo['stock']?>"></td>
+                <td><input class="btn btn-primary" type="submit" name="updateAdminLetgo" value="Update">
+                    <input class="btn btn-danger" type="submit" name="deleteAdminLetgo" value="Delete"></td>
             </form>
+
 
             <?php } ?>
         </tr>

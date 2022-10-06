@@ -9,56 +9,79 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
-<div>
+<div class="">
     <?php require "HTML/navbar.php"?>
 </div>
-<?php
-
-$sorguUsers = $conn-> prepare(" select * from card where whobuy=?");
-$sorguUsers -> execute([$_SESSION['id']]);
-$usersListele2 = $sorguUsers ->fetchAll();
-$row = $sorguUsers -> rowCount();
-
-
-
-
-foreach ($usersListele2 as $user) {
-?>
-<div class="container">
-    <div class="row m-3">
-         <div class="col-8">
-             <img src="<?php echo $user["photoUrl"]?>" width="300px" height="200px">
-             <?php echo $user["title"] ?>
-        </div>
-        <div class="col-2">
-            <?php echo $user['price'] . "<br>"?>
-        </div>
-        <div class="col-2">
-            <form method="post" action="./controls.php">
-                <button type="submit" class="btn btn-danger" name="cardSil" value="<?php echo $user['id']; ?>">Ürün Sil</button>
+<?php if(isset($_GET["hata"])) {
+    if($_GET["hata"]== "yes"){
+        ?>
+        <div class="alert alert-danger alert-dismissible fade show m-3" role="alert">
+            Yeterli stok yok!! Stok kadar ürün eklendi
+            <form method="post" action="controls.php">
+                <button type="submit" name="alertKapatCard" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </form>
         </div>
-    </div>
-    <?php }
-    if($row != 0){
-
-
-?>
-
-    <div class="row m-3">
-        <div class="text-end">
+    <?php }}?>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">#</th>
+        <th scope="col">Ürün Resmi</th>
+        <th scope="col">Ürün Adı</th>
+        <th scope="col">Ürün Adeti</th>
+        <th scope="col">Birim Ürün Fiyatı</th>
+        <th scope="col">İşlem</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    $sorguCard = $conn-> prepare(" select * from card where whobuy=?");
+    $sorguCard -> execute([$_SESSION['id']]);
+    $cardListele = $sorguCard ->fetchAll();
+    $rowCard = $sorguCard -> rowCount();
+    foreach ($cardListele as $card) {
+    ?>
+    <tr>
+        <th scope="row"><?php $card['id']; ?></th>
+        <td><img src="<?php echo $card["photoUrl"]?>" width="100px" height="75px"></td>
+        <td><?php echo $card["title"] ?></td>
+        <td>
             <form method="post" action="./controls.php">
-                <button type="submit" class="btn btn-primary" name="odemeYap" value="">Ödeme Yap</button>
+                <input type="hidden" name="urunID" value="<?php echo $card['urunID'] ?>">
+                <input type="number" name="kacAdetUrun" value="<?php echo $card['kacAdetUrun']?>">
+                <button type="submit" class="btn btn-primary ms-2" name="kacAdetUrunGuncelle" value="<?php echo $card['id']; ?>">Adet Güncelle</button>
+        </form>
+                </td>
+        <td><?php echo $card['price'] . " TL"?></td>
+        <td>
+            <form method="post" action="./controls.php">
+                <button type="submit" class="btn btn-danger" name="cardSil" value="<?php echo $card['id']; ?>">Ürün Sil</button>
             </form>
+        </td>
+    </tr>
+    <?php } ?>
+
+    </tbody>
+</table>
+
+<div>
+    <?php
+    if($rowCard != 0){
+    ?>
+        <div class="row m-3">
+            <div class="text-end">
+                <form method="post" action="./controls.php">
+                    <button type="submit" class="btn btn-success" name="odemeYap" value="">Ödeme Yap</button>
+                </form>
+            </div>
         </div>
-    </div>
     <?php } ?>
 </div>
+
 <div>
     <?php require "HTML/footer.php"?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous"></script>
+
 </body>
 </html>

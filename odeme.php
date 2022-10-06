@@ -45,8 +45,18 @@
             <div class="row">
                 <div class="col-12">
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="floatingPassword" placeholder=".." name="adress">
-                        <label for="floatingPassword">Address</label>
+                        <label for="adress" class="form-label"></label>
+                        <select class="form-select" id="adress" name="adress" >
+                        <option selected name="adress">Adres Seç</option>
+                        <?php
+                        $sorguUsers2 = $conn-> prepare(" select * from useradress  WHERE whoUser=?");
+                        $sorguUsers2 -> execute([$_SESSION['id']]);
+                        $usersListele2 = $sorguUsers2 -> fetchAll();
+
+                        foreach ($usersListele2 as $user) { ?>
+                        <option value="<?php echo $user["adress"] ?>"><?php echo $user["adress"] ?></option>
+                        <?php } ?>
+                    </select>
                     </div>
                 </div>
             </div>
@@ -86,7 +96,7 @@
                 $sorguUsers -> execute([$_SESSION["id"]]);
                 $row = $sorguUsers -> rowCount();
                 $usersListele = $sorguUsers -> fetchAll();
-                $toplam = 0;?>
+                $urunGenelToplam = 0;?>
         <div class="col-5">
             <div class="row">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
@@ -98,92 +108,44 @@
                 <ul class="list-group mb-3">
 
 
-               <?php foreach ($usersListele as $user) { ?>
-                    <li class="list-group-item d-flex justify-content-between lh-sm">
-                        <div class="row">
-                            <div class="col-2">
-                                <img src="<?php echo $user["photoUrl"] ?>" class="card-img-top" alt="...">
-                            </div>
-                            <div class="col-9">
-                                <h6 class="my-0"><?php echo $user["title"] ?></h6>
-                            </div>
-                        </div>
-                        <span class=""><?php echo $user["price"] . " TL" ?></span>
-                    </li>
+                   <table class="table">
+                       <thead>
+                       <tr>
+                           <th scope="col">#</th>
+                           <th scope="col">Photo</th>
+                           <th scope="col">Title</th>
+                           <th scope="col">Adet</th>
+                           <th scope="col">Ürün Fiyatı</th>
+                       </tr>
+                       </thead>
+                       <tbody>
+                       <?php foreach ($usersListele as $user) {
+                           $urunToplam = (int)$user["price"]*$user["kacAdetUrun"];
+                           $urunGenelToplam+=$urunToplam;
+                           ?>
+                           <tr>
+                               <th scope="row"><?php $user['id']; ?></th>
+                               <td><img src="<?php echo $user["photoUrl"]?>" width="100px" height="75px"></td>
+                               <td><?php echo $user["title"] ?></td>
+                               <td><?php echo $user["kacAdetUrun"] ?></td>
+                               <td><?php echo $urunToplam . " TL" ?></td>
+                           </tr>
+                       <?php } ?>
+
+                       </tbody>
+                   </table>
                <?php
-               $toplam +=$user["price"];
-               }?>
-
-
-
+               ?>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (TL)</span>
-                        <strong><?php echo $toplam . " TL" ?></strong>
+                        <strong><?php echo $urunGenelToplam . " TL" ?></strong>
                     </li>
                 </ul>
             </div>
 
         </div>
     </div>
-    <h4 class="m-3">Payment</h4>
-
-    <div class="row">
-        <div class="col-6">
-            <div class="form-check">
-                <input id="credit" name="paymentMethod" type="radio" class="form-check-input" checked >
-                <label class="form-check-label" for="credit">Credit card</label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <div class="form-check">
-                <input id="debit" name="paymentMethod" type="radio" class="form-check-input" >
-                <label class="form-check-label" for="debit">Debit card</label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <div class="form-check">
-                <input id="paypal" name="paymentMethod" type="radio" class="form-check-input" >
-                <label class="form-check-label" for="paypal">PayPal</label>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <label for="cc-name" class="form-label">Name on card</label>
-            <input type="text" class="form-control" id="cc-name" placeholder="" >
-            <small class="text-muted">Full name as displayed on card</small>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-6">
-            <label for="cc-number" class="form-label">Credit card number</label>
-            <input type="text" class="form-control" id="cc-number" placeholder="" >
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <label for="cc-expiration" class="form-label">Expiration</label>
-            <input type="text" class="form-control" id="cc-expiration" placeholder="" >
-        </div>
-        <div class="col-2">
-            <label for="cc-cvv" class="form-label">CVV</label>
-            <input type="text" class="form-control" id="cc-cvv" placeholder="" >
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            <button type="submit" class="btn btn-primary mt-3" name="satinAlindi" value=".">Satın Al</button>
-
-        </div>
-    </div>
-
-
-
-
+<button type="submit" class="btn btn-primary mt-3" name="satinAlindi" value=".">Satın Al</button>
 </form>
 
 

@@ -12,17 +12,18 @@ if(isset($_POST["loginButton"])){
 
     if($numberOfRow > 0){
         $_SESSION["id"] = $usersListele["id"];
+        $_SESSION["username"] = $usersListele["username"];
         $_SESSION["adminLevel"] = $usersListele["adminLevel"];
         $_SESSION['authLevel'] = $usersListele['authLevel'];
         if($usersListele['adminLevel'] == "1" && $usersListele['authLevel'] == "1"){
-            header('Location: ./adminPanel.php');
+            header('Location: ./adminDashboard.php');
         }elseif($usersListele['adminLevel'] == "0" && $usersListele['authLevel'] == "1"){
             header('Location: ./letgo.php');
         }else{
             header('Location: ./auth.php');
         }
     }else{
-        echo "Please correct username or password";
+        header("location: login.php?hata=yes");
     }
 }
 
@@ -44,10 +45,10 @@ if(isset($_POST["signUpbutton"])){
             $_SESSION["id"] = $usersListele['id'];
             header('Location: ./auth.php');
         }else{
-            echo "please enter the same passwords";
+            header('Location: ./register.php?hataPassword=yes');
         }
     }else{
-        echo "Please choose another username";
+        header('Location: ./register.php?hataUsername=yes');
     }
 }
 
@@ -64,7 +65,7 @@ if(isset($_POST["activationCodeSubmit"])){
         $usersListele3 = $sorguUsers3 -> fetch();
         $_SESSION['authLevel'] = $usersListele3['authLevel'];
         if($usersListele['adminLevel']== "1"){
-            header('Location: ./adminPanel.php');
+            header('Location: ./adminDashboard.php');
         }else{
             header('Location: ./letgo.php');
         }
@@ -78,7 +79,7 @@ if(isset($_POST["updateAdminPanel"])){
     $sorguUsers = $conn->prepare(" UPDATE users SET username=?,password=?,authLevel=?,adminLevel=?,discountRate=? WHERE id=?");
     $sorguUsers ->execute([$_POST["username"],$_POST["password"],$_POST["authLevel"],$_POST["adminLevel"],$_POST["discountRate"],$_POST["id"]]);
     if($sorguUsers){
-        header('Location: ./adminPanel.php');
+        header('Location: ./adminCustomers.php');
     }
 }
 
@@ -87,7 +88,7 @@ if(isset($_POST["delete"])){
 
     $sorguUsers -> execute([$_POST["id"]]);
     if($sorguUsers){
-        header('Location: ./adminPanel.php');
+        header('Location: ./adminCustomers.php');
     }
 }
 if(isset($_POST["logOut"])){
@@ -110,13 +111,13 @@ if(isset($_POST["addToCard"])){
     $sorguUsers -> execute([$_SESSION['id']]);
     $usersListele2 = $sorguUsers -> fetch();
 
-    $sorguUsers = $conn->prepare(" INSERT INTO card SET title=?,photoUrl=?,price=?,whoBuy=?,urunID=?");
+    $sorguUsers = $conn->prepare(" INSERT INTO card SET title=?,photoUrl=?,price=?,kacAdetUrun=?,whoBuy=?,urunID=?");
 
     $sorguUsers2 = $conn->prepare(" select * from letgo where id=?");
     $sorguUsers2 ->execute([$_POST["addToCard"]]);
     $usersListele = $sorguUsers2->fetch();
 
-    $sorguUsers ->execute([$usersListele["title"],$usersListele["photoUrl"],$usersListele['price'] - (($usersListele['price'] * $usersListele2["discountRate"])/100),$_SESSION["id"],$_POST["addToCard"]]);
+    $sorguUsers ->execute([$usersListele["title"],$usersListele["photoUrl"],$usersListele['price'] - (($usersListele['price'] * $usersListele2["discountRate"])/100),1,$_SESSION["id"],$_POST["addToCard"]]);
     header('Location: ./letgo.php');
 }
 if(isset($_POST["odemeYap"])){
@@ -129,10 +130,10 @@ if(isset($_POST["satinAlindi"])){
     $usersListele2 = $sorguUsers -> fetchAll();
     date_default_timezone_set('Europe/Istanbul');
     $orderDate = date("d-m-Y H:i:s");
-    $sorguUsers2 = $conn->prepare(" INSERT INTO buy SET title=?,photoUrl=?,price=?,whoBuy=?,urunID=?,durumu=?,siparisTarih=?");
+    $sorguUsers2 = $conn->prepare(" INSERT INTO buy SET title=?,photoUrl=?,price=?,whoBuy=?,urunID=?,kacAdetUrun=?,durumu=?,siparisTarih=?");
 
     foreach ($usersListele2 as $user) {
-        $sorguUsers2 ->execute([$user["title"],$user["photoUrl"],$user["price"],$user["whoBuy"],$user['urunID'],"Onay bekliyor",$orderDate]);
+        $sorguUsers2 ->execute([$user["title"],$user["photoUrl"],$user["price"],$user["whoBuy"],$user['urunID'],$user['kacAdetUrun'],"Onay bekliyor",$orderDate]);
 
         $sorguUsers4 = $conn->prepare(" select * from letgo where title=?");
         $sorguUsers4 ->execute([$user["title"]]);
@@ -171,6 +172,10 @@ if(isset($_POST["urunuOyla"])){
 if(isset($_POST["newUpdate"])){
     $sorguUsers = $conn->prepare(" UPDATE users SET photoAdress = ? , password =? WHERE id=?");
     $sorguUsers ->execute(["Photos/".$_POST["newPhoto"],$_POST["newPassword"],$_POST["id"]]);
+    if($_POST["adress"] != "") {
+        $sorguUsers2 = $conn->prepare(" INSERT INTO userAdress SET whoUser = ? , adress =?");
+        $sorguUsers2->execute([$_SESSION["id"], $_POST["adress"]]);
+    }
     header('Location: ./editProfile.php');
 }
 if(isset($_POST["adminSiparisDurumuGuncelle"])){
@@ -196,6 +201,39 @@ if(isset($_POST["siparisSilAdmin"])){
     $sorguUsers ->execute([$_POST["siparisSilAdmin"]]);
     header('Location: ./adminSiparisler.php');
 }
+if(isset($_POST["updateAdminLetgo"])){
+    $sorguUsers5 = $conn->prepare("UPDATE letgo SET title=?,price=?, stock = ? WHERE id=?");
+    $sorguUsers5 ->execute([$_POST["title"],$_POST["price"],$_POST["stock"],$_POST["id"]]);
+    header('Location: ./adminLetgo.php');
+}
+if(isset($_POST["deleteAdminLetgo"])){
+    $sorguUsers = $conn->prepare(" DELETE FROM letgo WHERE id=?");
+    $sorguUsers ->execute([$_POST["id"]]);
+    header('Location: ./adminLetgo.php');
+}
+
+if(isset($_POST["kacAdetUrunGuncelle"])){
+    $sorguUsers4 = $conn->prepare(" select * from letgo where id=?");
+    $sorguUsers4 ->execute([$_POST["urunID"]]);
+    $usersListele = $sorguUsers4 -> fetch();
+
+    $sorguUsers5 = $conn->prepare("UPDATE card SET kacAdetUrun = ? WHERE id=?");
+
+
+    if($usersListele["stock"] >= $_POST["kacAdetUrun"]){
+        $sorguUsers5 ->execute([$_POST["kacAdetUrun"],$_POST["kacAdetUrunGuncelle"]]);
+        header('Location: ./card.php');
+    }else{
+        $sorguUsers5 ->execute([$usersListele["stock"],$_POST["kacAdetUrunGuncelle"]]);
+        header('Location: ./card.php?hata=yes');
+    }
+
+}
+if(isset($_POST["alertKapatCard"])){
+
+    header('Location: ./card.php');
+}
+
 
 
 
