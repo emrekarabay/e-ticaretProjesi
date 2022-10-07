@@ -34,7 +34,6 @@ $usersListele2 = $sorguUsers2 -> fetch();
         <div class="row m-3">
             <div class="text-end">
                 <form method="post" action="./satinAlindi.php">
-
                     <button type="submit" class="btn btn-primary" name="satinAlindi" value="<?php echo $usersListele2['id']; ?>">Satın Al</button>
                 </form>
             </div>

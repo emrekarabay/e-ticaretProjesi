@@ -9,13 +9,13 @@
 </head>
 <body>
 <div>
-    <?php require "HTML/navbar.php"?>
+    <?php require "../HTML/navbar.php"?>
 </div>
 <div><?php
     $sorguUsers = $conn->prepare(" select * from users where id=?");
     $sorguUsers ->execute([$_SESSION["id"]]);
     $user = $sorguUsers -> fetch(); ?>
-    <form class="m-3" method="POST" action="controls.php">
+    <form class="m-3" method="POST" action="./userControls.php">
             <input type="hidden" name="id" value="<?php echo $user['id']?>">
         <div class="input-group mb-3">
             <span class="input-group-text">@</span>
@@ -51,18 +51,11 @@
         </div>
         <label for="exampleFormControlTextarea1">Adres Ekle</label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="2" name="adress"></textarea>
-
-        <input class="btn btn-primary mt-3" type="submit" name="newUpdate" value="Update">
-
+        <input class="btn btn-primary mt-3" type="submit" name="userProfileUpdate" value="Update">
     </form>
-
-
-
-
-
 </div>
 <div>
-    <?php require "HTML/footer.php"?>
+    <?php require "../HTML/footer.php" ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>

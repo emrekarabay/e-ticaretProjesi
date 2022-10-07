@@ -2,16 +2,16 @@
         if($_SESSION['adminLevel'] == "0" and $_SESSION['authLevel'] == "1"){ ?>
                     <div class="container">
                         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
-                            <a href="../letgo.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
+                            <a href="../user/userProducts.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
                                 <img class="bi me-2" src="../images/logo2.png" alt="logo">
                             </a>
 
                             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                                <li><a href="../letgo.php" class="nav-link px-2 link-dark">Home</a></li>
-                                <li><a href="../card.php" class="nav-link px-2 link-dark">Card</a></li>
-                                <li><a href="../urunRatings.php" class="nav-link px-2 link-dark">Ratings</a></li>
-                                <li><a href="../siparisler.php" class="nav-link px-2 link-dark">Orders</a></li>
-                                <li><a href="../editProfile.php" class="nav-link px-2 link-dark">Edit Profile</a></li>
+                                <li><a href="../user/userProducts.php" class="nav-link px-2 link-dark">Home</a></li>
+                                <li><a href="../user/userCard.php" class="nav-link px-2 link-dark">Card</a></li>
+                                <li><a href="../user/userProductRatings.php" class="nav-link px-2 link-dark">Ratings</a></li>
+                                <li><a href="../user/userOrders.php" class="nav-link px-2 link-dark">Orders</a></li>
+                                <li><a href="../user/userProfile.php" class="nav-link px-2 link-dark">Edit Profile</a></li>
                             </ul>
 
                             <div class="col-md-3 text-end">
@@ -98,7 +98,7 @@
                 </li>
             </ul>
             <?php }else{ ?>
-            <form class="" method="post" action="../controls.php">
+            <form class="mt-3 ms-3" method="post" action="../controls.php">
                 <input class="btn btn-warning " type="submit" name="logOut" value="Log Out">
             </form>
           <?php }  } ?>

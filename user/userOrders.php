@@ -10,7 +10,7 @@
 </head>
 <body>
 <div>
-    <?php require "HTML/navbar.php"?>
+    <?php require "../HTML/navbar.php" ?>
 </div>
 <div>
     <table class="table table-sm mt-2">
@@ -42,9 +42,9 @@
             <td><?php echo $user['durumu']?></td>
             <td><?php echo $user['siparisTarih']?></td>
             <td>
-                <form method="post" action="./controls.php">
+                <form method="post" action="./userControls.php">
                     <input type="hidden" name="cardSilTitle" value="<?php echo $user["urunID"] ?>">
-                    <button type="submit" class="btn btn-danger" name="siparisSil" value="<?php echo $user['id']; ?>">Delete Order</button>
+                    <button type="submit" class="btn btn-danger" name="deleteOrder" value="<?php echo $user['id']; ?>">Delete Order</button>
                 </form>
             </td>
         </tr>
@@ -55,7 +55,7 @@
 </div>
 <div>
 
-    <?php require "HTML/footer.php"?>
+    <?php require "../HTML/footer.php" ?>
 </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
