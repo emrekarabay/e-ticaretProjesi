@@ -9,7 +9,7 @@
 </head>
 <body>
 <div><?php require "../HTML/navbar.php" ?></div>
-<div>
+<div class="container mt-3">
     <table class="table table-sm mt-2">
         <thead>
         <tr>
@@ -32,10 +32,10 @@
         <tr>
             <form method="POST" action="./adminControls.php">
                 <td><input type="hidden" name="id" value="<?php echo $products['id']?>"><?php echo $products['id']?></td>
-                <td><input type="text" name="title" value="<?php echo $products['title']?>"></td>
+                <td><input class="form-control" type="text" name="title" value="<?php echo $products['title']?>"></td>
                 <td><img width="50px" height="50px" src='<?php echo $products["photoUrl"]; ?>'></td>
-                <td><input type="text" name="price" value="<?php echo $products['price']?>"></td>
-                <td><input type="text" name="stock" value="<?php echo $products['stock']?>"></td>
+                <td><input class="form-control" type="text" name="price" value="<?php echo $products['price']?>"></td>
+                <td><input class="form-control" type="text" name="stock" style=" width: 75px;" value="<?php echo $products['stock']?>"></td>
                 <td><input class="btn btn-primary" type="submit" name="adminUpdateProduct" value="Update">
                     <input class="btn btn-danger" type="submit" name="adminDeleteProduct" value="Delete"></td>
             </form>
@@ -46,6 +46,11 @@
         </tbody>
         <!-- Admin Tablo Verileri Veritabanından Alma Bitiş -->
     </table>
+    <div>
+        <form method="post" action="./adminControls.php" class="text-center">
+            <input class="btn btn-info text-light" type="submit" name="addNewProduct" value="Add New Product">
+        </form>
+    </div>
 </div>
 <div><?php require "../HTML/footer.php" ?></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>

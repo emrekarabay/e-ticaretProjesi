@@ -15,9 +15,9 @@
     </style>
 </head>
 <body>
-
+<div>
 <?php require "../HTML/navbar.php" ?>
-
+</div>
 <!-- İçerik Başlangıç -->
 <div class="container">
 <div class="row">
@@ -55,13 +55,12 @@
         $check =0;
     }
     ?>
-        <div class="col-3 mt-5">
+        <div class="col-3 mt-2">
             <div class="card mx-auto" style="width: 18rem;">
                 <img src="<?php echo $user["photoUrl"] ?>" class="card-img-top" alt="..." height="200px" width="200px">
                 <div class="card-body">
                     <h5 class="card-title"><?php echo $user['title'];?></h5>
-                    <h5 class="card-text "><?php echo $user['price'] . " TL yerine " . ($user['price'] - (($user['price'] * $usersListele2["discountRate"])/100)) . " TL "; ?></h5>
-                    <p class="card-title"><?php echo $user['stock'] . " adet stokta"; ?></p>
+                    <h6 class="card-title"><?php echo $user['stock'] . " adet stokta"; ?></h6>
                     <?php for ($i=0;$i < 5;$i++){
                         if($i<floor($oylamaOrt) && $check == 1){ ?>
                         <span class="fa fa-star checked"></span>
@@ -82,7 +81,9 @@
                             <span class="fa fa-star "></span>
                         <?php } }
                     echo "(" . $kisiSayisi . ") " ?>
-                    <form class="mt-3" method="post" action="./userControls.php">
+                    <h5 class="card-text mt-1"><?php echo $user['price'] . " TL yerine " . ($user['price'] - (($user['price'] * $usersListele2["discountRate"])/100)) . " TL "; ?></h5>
+
+                    <form class="mt-1" method="post" action="./userControls.php">
                         <button type="submit" class="btn btn-primary" name="addToCard" value="<?php echo $user['id']; ?>">Add to Card</button>
                     </form>
                 </div>

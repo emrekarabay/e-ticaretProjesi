@@ -9,10 +9,10 @@
 </head>
 <body>
 <div><?php require "../HTML/navbar.php" ?></div>
-<div>
+<div class="container">
     <table class="table table-sm mt-2">
         <thead>
-        <tr>
+        <tr class="text-center">
             <th scope="col">ID</th>
             <th scope="col">Username</th>
             <th scope="col">Password</th>
@@ -32,17 +32,17 @@
         $sorguUsers = $conn->query(" select * from users ");
         $usersListele = $sorguUsers -> fetchall();
         foreach ($usersListele as $user) { ?>
-        <tr>
+        <tr class="">
             <form method="POST" action="./adminControls.php">
                 <td><input type="hidden" name="id" value="<?php echo $user['id']?>"><?php echo $user['id']?></td>
-                <td><input type="text" name="username" value="<?php echo $user['username']?>"></td>
-                <td><input type="text" name="password" value="<?php echo $user['password']?>"></td>
-                <td><input type="text" name="authLevel" value="<?php echo $user['authLevel']?>"></td>
+                <td><input class="form-control" type="text" name="username" value="<?php echo $user['username']?>"></td>
+                <td><input class="form-control" type="text" name="password" value="<?php echo $user['password']?>"></td>
+                <td><input class="form-control" type="text" name="authLevel" style="width: 50px;" value="<?php echo $user['authLevel']?>"></td>
                 <td><img width="50px" height="50px" src='<?php echo $user["photoAdress"]; ?>'></td>
-                <td><input type="text" name="adminLevel" value="<?php echo $user['adminLevel']?>"></td>
+                <td><input class="form-control" type="text" name="adminLevel" style="width: 50px;" value="<?php echo $user['adminLevel']?>"></td>
                 <td><input class="btn btn-primary" type="submit" name="adminUpdateUser" value="Update">
                     <input class="btn btn-danger" type="submit" name="adminDeleteUser" value="Delete"></td>
-                <td><input type="text" name="discountRate" value="<?php echo $user['discountRate']?>"></td>
+                <td><input class="form-control" type="text" style="width: 75px;" name="discountRate" value="<?php echo $user['discountRate']?>"></td>
                 <td><?php echo $user["lastLoginDate"]; ?></td>
             </form>
 

@@ -11,7 +11,7 @@
 <div>
     <?php require "../HTML/navbar.php"?>
 </div>
-<div><?php
+<div class="container"><?php
     $sorguUsers = $conn->prepare(" select * from users where id=?");
     $sorguUsers ->execute([$_SESSION["id"]]);
     $user = $sorguUsers -> fetch(); ?>

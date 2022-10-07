@@ -10,8 +10,8 @@
 </head>
 <body>
 <div><?php require "../HTML/navbar.php" ?></div>
-
-<div class="m-3 align-self-center">
+<div class="container ">
+<div class="mt-3 align-self-center ">
     <?php
     $sorguOrders = $conn->prepare(" SELECT * FROM buy");
     $sorguOrders ->execute();
@@ -31,7 +31,7 @@
             $toplamSatilmasiBeklenenUrun++;
         }
     }   ?>
-    <div class="row m-3">
+    <div class="row mt-3">
         <div class="card text-center  col-5">
             <div class="card-header">
             Toplam Gerçekleşen Ciro
@@ -49,7 +49,7 @@
             </div>
         </div>
     </div>
-    <div class="row m-3">
+    <div class="row mt-3">
         <div class="card text-center  col-5">
             <div class="card-header">
                 Toplam Satılan Ürün
@@ -68,7 +68,7 @@
         </div>
     </div>
 </div>
-
+</div>
 <div><?php require "../HTML/footer.php" ?></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>

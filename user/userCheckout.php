@@ -16,7 +16,7 @@
 <body>
 
 <?php require "../HTML/navbar.php" ?>
-
+<div class="container">
 <form class="m-3" method="post" action="./userControls.php">
     <div class="row">
         <div class="col-6">
@@ -97,7 +97,7 @@
                 $row = $sorguUsers -> rowCount();
                 $usersListele = $sorguUsers -> fetchAll();
                 $urunGenelToplam = 0;?>
-        <div class="col-5">
+        <div class="col-6">
             <div class="row">
                 <h4 class="d-flex justify-content-between align-items-center mb-3">
                     <span class="text-primary">Your cart</span>
@@ -147,7 +147,7 @@
     </div>
 <button type="submit" class="btn btn-primary mt-3" name="payment" value=".">Payment</button>
 </form>
-
+</div>
 
 <?php require "../HTML/footer.php" ?>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>

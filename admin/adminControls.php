@@ -41,3 +41,14 @@ if(isset($_POST["adminDeleteUser"])){
         header('Location: ./adminUsers.php');
     }
 }
+if(isset($_POST["addNewProduct"])){
+    header('Location: ./adminAddNewProduct.php');
+}
+
+if(isset($_POST["addToProducts"])){
+    $sorguLetgo = $conn->prepare(" INSERT INTO letgo SET title=?,photoUrl=?,price=?,stock=?");
+    $sorguLetgo ->execute([$_POST["title"],$_POST["photoUrl"],$_POST["price"],$_POST["stock"]]);
+    header('Location: ./adminProducts.php');
+
+}
+

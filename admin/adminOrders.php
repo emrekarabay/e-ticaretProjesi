@@ -9,7 +9,7 @@
 </head>
 <body>
 <div><?php require "../HTML/navbar.php" ?></div>
-<div>
+<div class="container">
     <table class="table table-sm mt-2">
         <thead>
         <tr>
