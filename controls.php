@@ -5,7 +5,7 @@ if(isset($_POST["registerButton"])){
     header('Location: ./register.php');
 }
 if(isset($_POST["loginButton"])){
-    $sorguUsers = $conn->prepare(" SELECT * FROM users WHERE username=? and password=?");
+    $sorguUsers = $conn->prepare(" SELECT * FROM users WHERE username=? AND password=?");
     $sorguUsers ->execute([$_POST['username'],$_POST['password']]);
     $numberOfRow = $sorguUsers ->rowCount();
     $usersListele = $sorguUsers -> fetch();
@@ -16,7 +16,7 @@ if(isset($_POST["loginButton"])){
         $_SESSION["adminLevel"] = $usersListele["adminLevel"];
         $_SESSION['authLevel'] = $usersListele['authLevel'];
         if($usersListele['adminLevel'] == "1" && $usersListele['authLevel'] == "1"){
-            header('Location: ./adminDashboard.php');
+            header('Location: ./admin/adminDashboard.php');
         }elseif($usersListele['adminLevel'] == "0" && $usersListele['authLevel'] == "1"){
             header('Location: ./letgo.php');
         }else{
@@ -35,7 +35,7 @@ if(isset($_POST["signUpbutton"])){
         $sorguUsers = $conn->prepare(" INSERT INTO users SET username=?,password=?,authLevel=?,activationCode=?,photoAdress=?,adminLevel=?,discountRate=?");
         if($_POST['password'] == $_POST['confirmPassword']){
             $authNumber = rand(100,999);
-            $sorguUsers ->execute([$_POST['username'],$_POST['password'],"0",$authNumber,"Photos/none.svg","0","10"]);
+            $sorguUsers ->execute([$_POST['username'],$_POST['password'],"0",$authNumber,"images/none.svg","0","10"]);
             $_SESSION['adminLevel'] = "0";
 
             $sorguUsers2 = $conn->prepare(" SELECT * FROM users WHERE username=?");
@@ -74,23 +74,9 @@ if(isset($_POST["activationCodeSubmit"])){
     }
 }
 
-if(isset($_POST["updateAdminPanel"])){
 
-    $sorguUsers = $conn->prepare(" UPDATE users SET username=?,password=?,authLevel=?,adminLevel=?,discountRate=? WHERE id=?");
-    $sorguUsers ->execute([$_POST["username"],$_POST["password"],$_POST["authLevel"],$_POST["adminLevel"],$_POST["discountRate"],$_POST["id"]]);
-    if($sorguUsers){
-        header('Location: ./adminCustomers.php');
-    }
-}
 
-if(isset($_POST["delete"])){
-    $sorguUsers = $conn->prepare(" DELETE FROM users WHERE id=?");
 
-    $sorguUsers -> execute([$_POST["id"]]);
-    if($sorguUsers){
-        header('Location: ./adminCustomers.php');
-    }
-}
 if(isset($_POST["logOut"])){
 
 
@@ -125,8 +111,8 @@ if(isset($_POST["odemeYap"])){
 }
 
 if(isset($_POST["satinAlindi"])){
-    $sorguUsers = $conn-> prepare(" select * from card");
-    $sorguUsers -> execute();
+    $sorguUsers = $conn-> prepare(" select * from card where whoBuy=?");
+    $sorguUsers -> execute([$_SESSION['id']]);
     $usersListele2 = $sorguUsers -> fetchAll();
     date_default_timezone_set('Europe/Istanbul');
     $orderDate = date("d-m-Y H:i:s");
@@ -171,18 +157,14 @@ if(isset($_POST["urunuOyla"])){
 }
 if(isset($_POST["newUpdate"])){
     $sorguUsers = $conn->prepare(" UPDATE users SET photoAdress = ? , password =? WHERE id=?");
-    $sorguUsers ->execute(["Photos/".$_POST["newPhoto"],$_POST["newPassword"],$_POST["id"]]);
+    $sorguUsers ->execute(["images/".$_POST["newPhoto"],$_POST["newPassword"],$_POST["id"]]);
     if($_POST["adress"] != "") {
         $sorguUsers2 = $conn->prepare(" INSERT INTO userAdress SET whoUser = ? , adress =?");
         $sorguUsers2->execute([$_SESSION["id"], $_POST["adress"]]);
     }
     header('Location: ./editProfile.php');
 }
-if(isset($_POST["adminSiparisDurumuGuncelle"])){
-    $sorguUsers = $conn->prepare(" UPDATE buy SET durumu = ?  WHERE id=?");
-    $sorguUsers ->execute([$_POST["siparisDurumu"],$_POST["id"]]);
-    header('Location: ./adminSiparisler.php');
-}
+
 if(isset($_POST["siparisSil"])){
     $sorguUsers4 = $conn->prepare(" select * from letgo where id=?");
     $sorguUsers4 ->execute([$_POST["cardSilTitle"]]);
@@ -196,21 +178,8 @@ if(isset($_POST["siparisSil"])){
 
     header('Location: ./siparisler.php');
 }
-if(isset($_POST["siparisSilAdmin"])){
-    $sorguUsers = $conn->prepare(" DELETE FROM buy WHERE id=?");
-    $sorguUsers ->execute([$_POST["siparisSilAdmin"]]);
-    header('Location: ./adminSiparisler.php');
-}
-if(isset($_POST["updateAdminLetgo"])){
-    $sorguUsers5 = $conn->prepare("UPDATE letgo SET title=?,price=?, stock = ? WHERE id=?");
-    $sorguUsers5 ->execute([$_POST["title"],$_POST["price"],$_POST["stock"],$_POST["id"]]);
-    header('Location: ./adminLetgo.php');
-}
-if(isset($_POST["deleteAdminLetgo"])){
-    $sorguUsers = $conn->prepare(" DELETE FROM letgo WHERE id=?");
-    $sorguUsers ->execute([$_POST["id"]]);
-    header('Location: ./adminLetgo.php');
-}
+
+
 
 if(isset($_POST["kacAdetUrunGuncelle"])){
     $sorguUsers4 = $conn->prepare(" select * from letgo where id=?");

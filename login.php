@@ -14,7 +14,7 @@
     <div class="row">
         <div class="col-4">
             <div></div>
-            <img src="Photos/background.svg" width="300px" height="300px" class="ms-5" alt="bg">
+            <img src="images/background.svg" width="300px" height="300px" class="ms-5" alt="bg">
         </div>
         <div class="col-7 mt-3">
             <?php if(isset($_GET["hata"])) {

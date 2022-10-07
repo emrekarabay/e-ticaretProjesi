@@ -9,28 +9,28 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
 </head>
 <body>
-<div>
-    <?php require "HTML/navbar.php"?>
-</div>
-<div class="m-3 align-self-center">
+<div><?php require "../HTML/navbar.php" ?></div>
 
+<div class="m-3 align-self-center">
     <?php
-    $sorguUsers = $conn->prepare(" select * from buy");
-    $sorguUsers ->execute();
-    $usersListele = $sorguUsers -> fetchall();
+    $sorguOrders = $conn->prepare(" SELECT * FROM buy");
+    $sorguOrders ->execute();
+    $OrdersListele = $sorguOrders -> fetchall();
+
     $toplamGerceklesen = 0;
     $toplamBeklenen = 0;
     $toplamSatilanUrun =0;
     $toplamSatilmasiBeklenenUrun =0;
-    foreach ($usersListele as $user) {
-        if($user["durumu"] == "Teslim Edildi"){
-            $toplamGerceklesen += $user["price"];
-            $toplamSatilanUrun++;  ?>
-        <?php }else{
-            $toplamBeklenen += $user["price"]*$user["kacAdetUrun"];
+
+    foreach ($OrdersListele as $orders) {
+        if($orders["durumu"] == "Teslim Edildi"){
+            $toplamGerceklesen += $orders["price"];
+            $toplamSatilanUrun++;
+        }else{
+            $toplamBeklenen += $orders["price"]*$orders["kacAdetUrun"];
             $toplamSatilmasiBeklenenUrun++;
         }
-    }?>
+    }   ?>
     <div class="row m-3">
         <div class="card text-center  col-5">
             <div class="card-header">
@@ -69,11 +69,7 @@
     </div>
 </div>
 
-
-<div>
-
-    <?php require "HTML/footer.php"?>
-</div>
+<div><?php require "../HTML/footer.php" ?></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html>

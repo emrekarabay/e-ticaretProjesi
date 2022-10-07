@@ -3,7 +3,7 @@
                     <div class="container">
                         <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
                             <a href="../letgo.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none">
-                                <img class="bi me-2" src="../Photos/logo2.png" alt="logo">
+                                <img class="bi me-2" src="../images/logo2.png" alt="logo">
                             </a>
 
                             <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
@@ -61,33 +61,33 @@
 <div class="px-3 py-2 bg-light">
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-            <a href="../adminDashboard.php" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
-                <img class="bi me-2" src="../Photos/logo2.png" alt="logo">
+            <a href="../admin/adminDashboard.php" class="d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none">
+                <img class="bi me-2" src="../images/logo2.png" alt="logo">
             </a>
             <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
 
                 <li>
-                    <a href="../adminDashboard.php" class="nav-link text-dark">
+                    <a href="../admin/adminDashboard.php" class="nav-link text-dark">
                         <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
                         Dashboard
                     </a>
                 </li>
                 <li>
-                    <a href="../adminSiparisler.php" class="nav-link text-dark">
+                    <a href="../admin/adminOrders.php" class="nav-link text-dark">
                         <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
                         Orders
                     </a>
                 </li>
                 <li>
-                    <a href="../adminLetgo.php" class="nav-link text-dark">
+                    <a href="../admin/adminProducts.php" class="nav-link text-dark">
                         <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#grid"></use></svg>
                         Products
                     </a>
                 </li>
                 <li>
-                    <a href="../adminCustomers.php" class="nav-link text-dark">
+                    <a href="../admin/adminUsers.php" class="nav-link text-dark">
                         <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#people-circle"></use></svg>
-                        Customers
+                        Users
                     </a>
                 </li>
                 <li>
