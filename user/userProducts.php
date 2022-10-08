@@ -18,6 +18,18 @@
 <div>
 <?php require "../HTML/navbar.php" ?>
 </div>
+<?php if(isset($_GET["addToCart"])) {
+    if($_GET["addToCart"]== "yes"){
+        ?>
+        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
+            Added to Cart
+            <form method="post" action="./userControls.php">
+            <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close" name="closeAlertAddToCart"></button>
+            </form>
+        </div>
+    <?php }}?>
+
+<?php require "userCartRight.php"?>
 <!-- İçerik Başlangıç -->
 <div class="container">
 <div class="row">
@@ -59,7 +71,7 @@
             <div class="card mx-auto" style="width: 18rem;">
                 <img src="<?php echo $user["photoUrl"] ?>" class="card-img-top" alt="..." height="200px" width="200px">
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo $user['title'];?></h5>
+                    <a class="text-decoration-none text-dark"  href="./userProductDetail.php?id=<?php echo $user["id"]?>"><h5 class="card-title"><?php echo $user['title'];?></h5></a>
                     <h6 class="card-title"><?php echo $user['stock'] . " adet stokta"; ?></h6>
                     <?php for ($i=0;$i < 5;$i++){
                         if($i<floor($oylamaOrt) && $check == 1){ ?>
@@ -84,7 +96,7 @@
                     <h5 class="card-text mt-1"><?php echo $user['price'] . " TL yerine " . ($user['price'] - (($user['price'] * $usersListele2["discountRate"])/100)) . " TL "; ?></h5>
 
                     <form class="mt-1" method="post" action="./userControls.php">
-                        <button type="submit" class="btn btn-primary" name="addToCard" value="<?php echo $user['id']; ?>">Add to Card</button>
+                        <button type="submit" class="btn btn-primary" name="addToCard" id="addToCard" value="<?php echo $user['id']; ?>">Add to Card</button>
                     </form>
                 </div>
             </div>

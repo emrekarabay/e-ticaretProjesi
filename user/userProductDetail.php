@@ -10,7 +10,7 @@
 </head>
 <body>
 <div>
-    <?php require "HTML/navbar.php"?>
+    <?php require "../HTML/navbar.php" ?>
 </div>
 <?php
 $sorguUsers = $conn-> prepare(" select * from users  WHERE id=?");
@@ -18,10 +18,10 @@ $sorguUsers -> execute([$_SESSION['id']]);
 $usersListele = $sorguUsers -> fetch();
 
 $sorguUsers2 = $conn-> prepare(" select * from letgo  WHERE id=?");
-$sorguUsers2 -> execute([$_POST['urun']]);
+$sorguUsers2 -> execute([$_GET['id']]);
 $usersListele2 = $sorguUsers2 -> fetch();
 ?>
-    <div class="container m-3">
+    <div class="container mt-3">
         <div class="row">
             <div class="col-8">
                 <img src="<?php echo $usersListele2["photoUrl"]?>">
@@ -33,14 +33,15 @@ $usersListele2 = $sorguUsers2 -> fetch();
         </div>
         <div class="row m-3">
             <div class="text-end">
-                <form method="post" action="./satinAlindi.php">
-                    <button type="submit" class="btn btn-primary" name="satinAlindi" value="<?php echo $usersListele2['id']; ?>">Satın Al</button>
+                <form method="post" action="./userControls.php">
+                    <button type="submit" class="btn btn-primary" name="addToCard" value="<?php echo $usersListele2['id']; ?>">Add to Cart</button>
                 </form>
             </div>
         </div>
     </div>
+
 <div>
-    <?php require "HTML/footer.php"?>
+    <?php require "../HTML/footer.php" ?>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

@@ -10,6 +10,7 @@
 </head>
 <body>
 <?php require "../HTML/navbar.php" ?>
+<?php require "userCartRight.php"?>
 
 <div class="container">
 <table class="table">

@@ -1,5 +1,4 @@
 
-
 <?php if(isset($_SESSION['id'])){
         if($_SESSION['adminLevel'] == "0" and $_SESSION['authLevel'] == "1"){
 
@@ -14,26 +13,39 @@
                             </a>
                             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                                 <li><a href="../user/userProducts.php" class="nav-link px-2 link-dark">Home</a></li>
-                                <li><a href="../user/userCard.php" class="nav-link px-2 link-dark">Card</a></li>
-                                <li><a href="../user/userProductRatings.php" class="nav-link px-2 link-dark">Ratings</a></li>
-                                <li><a href="../user/userOrders.php" class="nav-link px-2 link-dark">Orders</a></li>
-
                             </ul>
-
                             <div class="dropdown text-end me-2">
                                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img src="<?php echo  $usersListele["photoAdress"]?>" alt="mdo" width="32" height="32" class="rounded-circle">
+                                    <img src="<?php echo  $usersListele["photoAdress"]?>" alt="mdo" width="48" height="48" class="rounded-circle">
                                 </a>
                                 <ul class="dropdown-menu text-small" style="">
-                                    <li><a class="dropdown-item" href="../user/userProfile.php">Profile</a></li>
-                                    <li><a class="dropdown-item" href="#">My Coupons</a></li>
+                                    <li><a class="dropdown-item" href="../user/userOrders.php">My Orders</a></li>
+                                    <li><a class="dropdown-item" href="../user/userProfile.php">My Profile</a></li>
+                                    <li><a class="dropdown-item" href="../user/userProductRatings.php">Ratings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="../user/userCoupons.php">My Coupons</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><form class="" method="post" action="../controls.php">
                                             <input class="btn btn-warning ms-4" type="submit" name="logOut" value="Log Out">
                                         </form>
                                     </li>
                                 </ul>
+
                             </div>
+                            <div class="ms-3 me-1">
+                                <a href="../user/userProducts.php" class="d-flex align-items-center col-md-3 mb-2 mb-md-0 text-dark text-decoration-none ms-2 "data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                                    <b><svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">
+                                            <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                                        </svg></b>
+
+                                </a>
+
+                            </div>
+                            <?php  $sorguUsers = $conn-> prepare(" select * from card where whoBuy=?");
+                            $sorguUsers -> execute([$_SESSION["id"]]);
+                            $row = $sorguUsers -> rowCount();
+                            ?>
+                            <span class="pe-3"><b><?php echo $row ?></b></span>
                             <!--
                             <div class="col-md-3 text-end">
                                 <form class="" method="post" action="../controls.php">
@@ -114,6 +126,13 @@
                     </a>
                 </li>
                 <li>
+                    <a href="../admin/adminCoupons.php" class="nav-link text-dark">
+                        <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#coupons"></use></svg>
+                        Coupons
+                    </a>
+                </li>
+
+                <li>
                     <form class="" method="post" action="../controls.php">
                         <input class="btn btn-warning " type="submit" name="logOut" value="Log Out">
 
@@ -151,5 +170,10 @@
     <symbol id="grid" viewBox="0 0 16 16">
         <path d="M1 2.5A1.5 1.5 0 0 1 2.5 1h3A1.5 1.5 0 0 1 7 2.5v3A1.5 1.5 0 0 1 5.5 7h-3A1.5 1.5 0 0 1 1 5.5v-3zM2.5 2a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 1h3A1.5 1.5 0 0 1 15 2.5v3A1.5 1.5 0 0 1 13.5 7h-3A1.5 1.5 0 0 1 9 5.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zM1 10.5A1.5 1.5 0 0 1 2.5 9h3A1.5 1.5 0 0 1 7 10.5v3A1.5 1.5 0 0 1 5.5 15h-3A1.5 1.5 0 0 1 1 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3zm6.5.5A1.5 1.5 0 0 1 10.5 9h3a1.5 1.5 0 0 1 1.5 1.5v3a1.5 1.5 0 0 1-1.5 1.5h-3A1.5 1.5 0 0 1 9 13.5v-3zm1.5-.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5h-3z"></path>
     </symbol>
+    <symbol id="coupons" viewBox="0 0 16 16">
+            <path d="M4 4.85v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Zm-7 1.8v.9h1v-.9H4Zm7 0v.9h1v-.9h-1Z"/>
+            <path d="M1.5 3A1.5 1.5 0 0 0 0 4.5V6a.5.5 0 0 0 .5.5 1.5 1.5 0 1 1 0 3 .5.5 0 0 0-.5.5v1.5A1.5 1.5 0 0 0 1.5 13h13a1.5 1.5 0 0 0 1.5-1.5V10a.5.5 0 0 0-.5-.5 1.5 1.5 0 0 1 0-3A.5.5 0 0 0 16 6V4.5A1.5 1.5 0 0 0 14.5 3h-13ZM1 4.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 .5.5v1.05a2.5 2.5 0 0 0 0 4.9v1.05a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-1.05a2.5 2.5 0 0 0 0-4.9V4.5Z"/>
+    </symbol>
+
 </svg>
 

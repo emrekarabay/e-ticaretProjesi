@@ -11,8 +11,8 @@ if(isset($_POST["addToCard"])){
     $sorguProduct ->execute([$_POST["addToCard"]]);
     $productListele = $sorguProduct->fetch();
 
-    $sorguCard = $conn->prepare(" select * from card where urunID=?");
-    $sorguCard -> execute([$_POST["addToCard"]]);
+    $sorguCard = $conn->prepare(" select * from card where urunID=? and whoBuy=?");
+    $sorguCard -> execute([$_POST["addToCard"],$_SESSION['id']]);
     $numberOfRow = $sorguCard -> rowCount();
     $cardListele = $sorguCard->fetch();
 
@@ -23,7 +23,7 @@ if(isset($_POST["addToCard"])){
         $sorguCard3 = $conn->prepare(" UPDATE card SET kacAdetUrun = ? WHERE urunID=?");
         $sorguCard3 -> execute([$cardListele["kacAdetUrun"]+1,$_POST["addToCard"]]);
     }
-    header('Location: ./userProducts.php');
+    header('Location: ./userProducts.php?addToCart=yes');
 }
 
 if(isset($_POST["howManyProduct"])){
@@ -62,9 +62,18 @@ if(isset($_POST["payment"])){
     date_default_timezone_set('Europe/Istanbul');
     $orderDate = date("d-m-Y H:i:s");
     $sorguUsers2 = $conn->prepare(" INSERT INTO buy SET title=?,photoUrl=?,price=?,whoBuy=?,urunID=?,kacAdetUrun=?,durumu=?,siparisTarih=?");
+    $gelenDiscount = $_POST["discountTL"];
 
     foreach ($usersListele2 as $user) {
-        $sorguUsers2 ->execute([$user["title"],$user["photoUrl"],$user["price"],$user["whoBuy"],$user['urunID'],$user['kacAdetUrun'],"Onay bekliyor",$orderDate]);
+        $yeniFiyat=$user["price"]-$gelenDiscount;
+        if($yeniFiyat < 0){
+            $sorguUsers2 ->execute([$user["title"],$user["photoUrl"],"0",$user["whoBuy"],$user['urunID'],$user['kacAdetUrun'],"Onay bekliyor",$orderDate]);
+            $gelenDiscount = $yeniFiyat*-1;
+        }else{
+            $sorguUsers2 ->execute([$user["title"],$user["photoUrl"],$yeniFiyat,$user["whoBuy"],$user['urunID'],$user['kacAdetUrun'],"Onay bekliyor",$orderDate]);
+            $gelenDiscount = 0;
+        }
+
 
         $sorguUsers4 = $conn->prepare(" select * from letgo where title=?");
         $sorguUsers4 ->execute([$user["title"]]);
@@ -74,6 +83,11 @@ if(isset($_POST["payment"])){
 
         $sorguUsers5 = $conn->prepare("UPDATE letgo SET stock = ? WHERE title=?");
         $sorguUsers5 ->execute([$usersListele4["stock"],$user["title"]]);
+    }
+
+    if(isset($_POST["whichCouponUse"])){
+        $sorguUsers6 = $conn->prepare(" DELETE FROM userscoupons where whoUser=? and id=?");
+        $sorguUsers6 ->execute([$_SESSION['id'],$_POST["whichCouponUse"]]);
     }
 
 
@@ -116,3 +130,27 @@ if(isset($_POST["userProfileUpdate"])){
     }
     header('Location: ./userProfile.php');
 }
+
+if(isset($_POST["cart"])){
+    header('Location: ./userCard.php');
+}
+if(isset($_POST["checkoutDirectly"])){
+    header('Location: ./userCheckout.php');
+}
+
+if(isset($_POST["closeAlertAddToCart"])){
+    header('Location: ./userProducts.php');
+}
+
+if(isset($_POST["redeemButton"])){
+    $sorguUserCoupons = $conn-> prepare(" select * from userscoupons  WHERE whoUser=?");
+    $sorguUserCoupons -> execute([$_SESSION['id']]);
+    $couponsListele = $sorguUserCoupons -> fetchAll();
+    foreach ($couponsListele as $coupons) {
+        if($_POST["promocode"] == $coupons["couponsCode"]){
+            header('Location: ./userCheckout.php?coupon=true&id=' .$coupons["id"]);
+        }
+    }
+}
+
+

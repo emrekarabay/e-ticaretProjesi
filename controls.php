@@ -60,6 +60,11 @@ if(isset($_POST["activationCodeSubmit"])){
         $sorguUsers2 = $conn->prepare(" UPDATE users SET authLevel = ? WHERE id=?");
         $sorguUsers2 ->execute(["1",$usersListele["id"]]);
 
+        $random = mt_rand();
+        $sorguCoupons = $conn->prepare(" INSERT INTO userscoupons SET whoUser=?,couponsDiscountRate=?,couponsCode=?,couponsTitle=?");
+        $sorguCoupons ->execute([$_SESSION['id'],10,$random,"Welcome Coupon"]);
+
+
         $sorguUsers3 = $conn->prepare(" select * from users where id=?");
         $sorguUsers3 ->execute([$_SESSION['id']]);
         $usersListele3 = $sorguUsers3 -> fetch();

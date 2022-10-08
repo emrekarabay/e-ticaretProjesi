@@ -130,22 +130,49 @@
                                <td><?php echo $user["kacAdetUrun"] ?></td>
                                <td><?php echo $urunToplam . " TL" ?></td>
                            </tr>
-                       <?php } ?>
+                       <?php }
+                       $discountTL=0;
+                       ?>
+                       <?php if(isset($_GET["coupon"])){
+                                if($_GET["coupon"] == "true"){
 
+                                    $sorguUserCoupons = $conn-> prepare(" select * from userscoupons  WHERE whoUser=? and id=?");
+                                    $sorguUserCoupons -> execute([$_SESSION['id'],$_GET["id"]]);
+                                    $couponsListele = $sorguUserCoupons -> fetch();
+                                    $discountTL = (($urunGenelToplam* (int)$couponsListele["couponsDiscountRate"])/100);
+                                }
+
+                           ?>
+                       <tr class="text-success fw-bold">
+                           <th scope="row"></th>
+                           <td></td>
+                           <td>Promo Code</td>
+                           <td><input type="hidden" name="whichCouponUse" value="<?php echo $_GET["id"] ?>"></td>
+                           <td><?php echo  "-" . $discountTL . " TL" ?></td>
+                       </tr>
+                        <?php } ?>
                        </tbody>
                    </table>
-               <?php
-               ?>
+                    <input type="hidden" name="discountTL" value="<?php echo $discountTL  ?>">
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <input type="text" name="promocode" class="form-control" placeholder="Promo code">
+
+                        </div>
+                        <div class="col-3 ms-3">
+                            <button type="submit" class="btn btn-info col" name="redeemButton" >Redeem</button>
+                        </div>
+                    </div>
                     <li class="list-group-item d-flex justify-content-between">
                         <span>Total (TL)</span>
-                        <strong><?php echo $urunGenelToplam . " TL" ?></strong>
+                        <strong><?php echo ($urunGenelToplam-$discountTL) . " TL" ?></strong>
                     </li>
                 </ul>
             </div>
 
         </div>
     </div>
-<button type="submit" class="btn btn-primary mt-3" name="payment" value=".">Payment</button>
+<button type="submit" class="btn btn-primary mt-3" name="payment" value="">Payment</button>
 </form>
 </div>
 
