@@ -52,7 +52,7 @@
     <div class="row mt-3">
         <div class="card text-center  col-5">
             <div class="card-header">
-                Toplam Satılan Ürün
+                Teslim Edilen Sipariş
             </div>
             <div class="card-body">
                 <h3><?php echo $toplamSatilanUrun   ?></h3>
@@ -60,12 +60,57 @@
         </div>
         <div class="card text-center  col-5 ms-5">
             <div class="card-header">
-                Toplam Satılması Beklenen Ürün
+                Teslim Edilmeyi Bekleyen Sipariş
             </div>
             <div class="card-body">
                 <h3><?php echo $toplamSatilmasiBeklenenUrun  ?></h3>
             </div>
         </div>
+    </div>
+    <div class="row mt-3">
+        <div class="card text-center  col-5">
+            <div class="card-header">
+                Stoğu Azalan Ürünler
+            </div>
+            <div class="card-body">
+                <table class="table table-sm mt-2">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Photo</th>
+                        <th scope="col">Stock</th>
+
+                    </tr>
+                    </thead>
+                    <!-- HTML Admin Tablo Başlıklar Bitiş -->
+                    <tbody class="table-group-divider">
+                    <!-- Admin Tablo Verileri Veritabanından Alma Başlangıç -->
+                    <?php
+                    $sorguProducts = $conn->query("SELECT * FROM `letgo` ORDER BY `letgo`.`stock` ASC LIMIT 5");
+                    $productsListele = $sorguProducts -> fetchall();
+                    foreach ($productsListele as $products) {
+
+                        ?>
+                    <tr>
+                        <form method="POST" action="./adminControls.php">
+                            <td><input type="hidden" name="id" value="<?php echo $products['id']?>"><?php echo $products['id']?></td>
+                            <td><img width="50px" height="50px" src='<?php echo $products["photoUrl"]; ?>'></td>
+                            <td><?php echo $products['stock']?></td>
+
+
+
+                        <?php } ?>
+
+                    </tr>
+
+                    </tbody>
+                    <!-- Admin Tablo Verileri Veritabanından Alma Bitiş -->
+                </table>
+                <input class="btn btn-info text-light" type="submit" name="adminStockUpdate" value="Stock Update">
+                </form>
+            </div>
+        </div>
+
     </div>
 </div>
 </div>

@@ -36,7 +36,8 @@
                 <td><?php echo $orders['title']?></td>
                 <td><?php echo $orders['kacAdetUrun']?></td>
                 <td><?php echo $orders['kacAdetUrun']*$orders['price']. " TL" ?></td>
-                <td><form method="post" action="./adminControls.php">
+                <td>
+                    <form method="post" action="./adminControls.php">
                     <input type="hidden" name="id" value="<?php echo $orders['id']?>">
                     <div class="form-floating">
                         <select name = "siparisDurumu" class="form-select" id="floatingSelect" aria-label="Floating label select example">
@@ -47,8 +48,15 @@
                         </select>
                         <label for="floatingSelect">Sipariş Durumu</label>
                     </div>
-                    <button type="submit" class="btn btn-primary m-3" name="adminUpdateStatusOfOrder" value="">Update Status of Order</button>
-                    <button type="submit" class="btn btn-danger" name="adminDeleteOrder" value="<?php echo $orders['id']; ?>">Delete Order</button>
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-primary mt-3" name="adminUpdateStatusOfOrder" value="">Update Status</button>
+                            </div>
+                            <div class="col-6">
+                                <button type="submit" class="btn btn-danger mt-3" name="adminDeleteOrder" value="<?php echo $orders['id']; ?>">Delete Order</button>
+
+                            </div>
+                        </div>
 
                 </form></td>
                 <td><?php echo $orders['siparisTarih'] ?></td>

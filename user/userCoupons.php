@@ -41,14 +41,6 @@
                         <br>
 
                         <!--Copy to clipboard-->
-
-                        <a id="Copy" href="#" type="button" class="btn btn-primary mt-2 ripple-surface text-center">COPY TO
-                            CLIPBOARD <i class="far fa-copy ml-2"></i></a>
-
-
-
-
-
                     </div>
                 </div>
 

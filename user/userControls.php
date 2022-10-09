@@ -79,7 +79,7 @@ if(isset($_POST["payment"])){
         $sorguUsers4 ->execute([$user["title"]]);
 
         $usersListele4 = $sorguUsers4->fetch();
-        $usersListele4["stock"] -= 1;
+        $usersListele4["stock"] -= $user['kacAdetUrun'];
 
         $sorguUsers5 = $conn->prepare("UPDATE letgo SET stock = ? WHERE title=?");
         $sorguUsers5 ->execute([$usersListele4["stock"],$user["title"]]);
@@ -97,10 +97,15 @@ if(isset($_POST["payment"])){
 }
 
 if(isset($_POST["deleteOrder"])){
+    $sorguUsers = $conn-> prepare(" select * from buy Where whoBuy=? and urunID=?");
+    $sorguUsers -> execute([$_SESSION['id'],$_POST["cardSilTitle"]]);
+    $usersListele2 = $sorguUsers ->fetch();
+
     $sorguUsers4 = $conn->prepare(" select * from letgo where id=?");
     $sorguUsers4 ->execute([$_POST["cardSilTitle"]]);
     $usersListele = $sorguUsers4 -> fetch();
-    $usersListele["stock"] += 1;
+    $usersListele["stock"] += $usersListele2["kacAdetUrun"];
+
     $sorguUsers5 = $conn->prepare("UPDATE letgo SET stock = ? WHERE id=?");
     $sorguUsers5 ->execute([$usersListele["stock"],$_POST["cardSilTitle"]]);
 

@@ -12,7 +12,12 @@
                                 <img class="bi me-2" src="../images/logo2.png" alt="logo">
                             </a>
                             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                                <li><a href="../user/userProducts.php" class="nav-link px-2 link-dark">Home</a></li>
+                                <li><a href="../user/userProducts.php" class="nav-link px-2 link-dark">All</a></li>
+                                <?php $sorguCategory = $conn->query(" select * from category ");
+                                $categoryListele = $sorguCategory->fetchall();
+                                foreach ($categoryListele as $category) {  ?>
+                                <li><a href="../user/userProducts.php" class="nav-link px-2 link-dark"><?php echo $category["category"] ?></a></li>
+                                <?php } ?>
                             </ul>
                             <div class="dropdown text-end me-2">
                                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

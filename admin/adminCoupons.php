@@ -38,6 +38,11 @@
         <!-- Admin Tablo Verileri Veritabanından Alma Bitiş -->
     </table>
 </div>
+<div>
+    <form method="post" action="./adminControls.php" class="text-center">
+        <input class="btn btn-info text-light" type="submit" name="adminCreateCoupons" value="New Create Coupons">
+    </form>
+</div>
 <div><?php require "../HTML/footer.php" ?></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

@@ -52,3 +52,34 @@ if(isset($_POST["addToProducts"])){
 
 }
 
+if(isset($_POST["adminCreateCoupons"])){
+    header('Location: ./adminNewCreateCoupon.php');
+}
+
+if(isset($_POST["createNewCoupon"])) {
+    $sorguCoupons = $conn->prepare(" INSERT INTO userscoupons SET whoUser=?,couponsDiscountRate=?,couponsCode=?,couponsTitle=?");
+
+    if ($_POST["user"] == "all") {
+        $sorguUsers = $conn->query(" select * from users ");
+        $usersListele = $sorguUsers->fetchall();
+        foreach ($usersListele as $user) {
+            $random = mt_rand();
+            $sorguCoupons->execute([$user["id"], $_POST["discountRate"], $random,$_POST["title"]]);
+        }
+    }
+    else{
+        $random = mt_rand();
+            $sorguCoupons->execute([$_POST["user"], $_POST["discountRate"], $random,$_POST["title"]]);
+        }
+    header('Location: ./adminCoupons.php');
+
+}
+
+if(isset($_POST["adminStockUpdate"])){
+    header('Location: ./adminProducts.php');
+}
+
+
+
+
+
