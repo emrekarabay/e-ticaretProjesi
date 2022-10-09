@@ -2,13 +2,13 @@ Güney Marmara Kalkınma Ajansı, Balıkesir Teknokent, Balıkesir Ticaret Odas�
 
 ## 1 - Admin Rolü 
 
-* :moneybag: **Ciro İşlemleri :** Admin **eticaretProjesi** admin paneli ile tamamlanan ve bekleyen şipariş sayısını bununla birlikte gerçekleşen cirosunu ve beklenen ciro miktarını **Dashboard** sekmesinde görebilir.
+* :moneybag: **Ciro İşlemleri :** Admin **eticaretProjesi** admin paneli ile tamamlanan ve bekleyen şipariş sayısını bununla birlikte gerçekleşen ciro ve beklenen ciro miktarını görebilir.
 
-* :package: **Sipariş işlemleri :** Admin  **eticaretProjesi** admin panelinindeki **Orders** sekmesinde siparişlerin detaylı bilgisini görüntüleyebilirken ayrıca iptal edebilir ve sipariş durumunu güncelleyebilir. 
+* :package: **Sipariş işlemleri :** Admin  **eticaretProjesi** admin panelininde siparişlerin detaylı bilgisini görüntüleyebilir,iptal edebilir,sipariş durumunu güncelleyebilirken sepetinde ürün unutan kullanıcılara özel indirim kuponu oluşturabilir.
 
-* :pencil2:	**Ürün işlemleri:** Admin **eticaretProjesi** admin paneli ile sitede kullanıcılara gösterilen ürünlerin adını,resmini,fiyatını,stok durumunu **Products** sekmesinde görüntüleyebilir,güncelleyebilir.
+* :pencil2:	**Ürün işlemleri:** Admin **eticaretProjesi** admin paneli ile sitede kullanıcılara gösterilen ürünlerin adını,resmini,fiyatını,stok durumunu görüntüleyebilir,güncelleyebilir,yeni ürün ekleyebilir.
 
-* :man: **Kullanıcı İşlemleri :** Admin  **eticaretProjesi** admin panelinindeki **Customers** sekmesinde kullanıcıların detaylı bilgisine ulaşabilir,güncelleyebilir ve silebilir.
+* :man: **Kullanıcı İşlemleri :** Admin  **eticaretProjesi** admin panelininde kullanıcıların detaylı bilgisine ulaşabilir,güncelleyebilir ve silebilir.
 
 ## 2 - Kullanıcı Rolü
 
