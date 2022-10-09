@@ -25,10 +25,11 @@
                                 </a>
                                 <ul class="dropdown-menu text-small" style="">
                                     <li><a class="dropdown-item" href="../user/userOrders.php">My Orders</a></li>
-                                    <li><a class="dropdown-item" href="../user/userProfile.php">My Profile</a></li>
-                                    <li><a class="dropdown-item" href="../user/userProductRatings.php">Ratings</a></li>
+                                    <li><a class="dropdown-item" href="../user/userProductRatings.php">My Assessments</a></li>
                                     <li><hr class="dropdown-divider"></li>
-                                    <li><a class="dropdown-item" href="../user/userCoupons.php">My Coupons</a></li>
+                                    <li><a class="dropdown-item" href="../user/userProfile.php">My Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="../user/userCoupons.php">My Discount Coupons</a></li>
                                     <li><hr class="dropdown-divider"></li>
                                     <li><form class="" method="post" action="../controls.php">
                                             <input class="btn btn-warning ms-4" type="submit" name="logOut" value="Log Out">

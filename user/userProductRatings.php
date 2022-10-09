@@ -56,7 +56,7 @@
                         <label for="floatingSelect">Ürün Puanın</label>
                     </div>
             </td>
-            <td><button type="submit" class="btn btn-primary" name="rateTheProduct" value="">Rate the Product</button></td>
+            <td><button type="submit" class="btn btn-primary" name="rateTheProduct" value="">Evaluate the Product</button></td>
                 </form>
         </tr>
     <?php } } ?>

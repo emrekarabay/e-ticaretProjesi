@@ -10,6 +10,16 @@ if(isset($_POST["adminUpdateStatusOfOrder"])){
 if(isset($_POST["adminDeleteOrder"])){
     $sorguOrders = $conn->prepare(" DELETE FROM buy WHERE id=?");
     $sorguOrders ->execute([$_POST["adminDeleteOrder"]]);
+
+    $sorguProducts2 = $conn->prepare(" SELECT * FROM letgo WHERE id=?");
+    $sorguProducts2 ->execute([$_POST["urunID"]]);
+    $ordersListele2 = $sorguProducts2 -> fetch();
+
+    $ordersListele2["stock"] += $_POST['kacAdetUrun'];
+
+    $sorguProducts = $conn->prepare("UPDATE letgo SET stock = ? WHERE id=?");
+    $sorguProducts ->execute([$ordersListele2["stock"],$_POST["urunID"]]);
+
     header('Location: ./adminOrders.php');
 }
 
@@ -78,6 +88,24 @@ if(isset($_POST["createNewCoupon"])) {
 if(isset($_POST["adminStockUpdate"])){
     header('Location: ./adminProducts.php');
 }
+
+if(isset($_POST["getCouponForCart"])) {
+
+    $sorguUsers = $conn->prepare(" select * from users WHERE id=?");
+    $sorguUsers -> execute([$_POST["id"]]);
+
+    $usersListele = $sorguUsers->fetch();
+
+    $random = mt_rand();
+
+    $sorguCoupons = $conn->prepare(" INSERT INTO userscoupons SET whoUser=?,couponsDiscountRate=?,couponsCode=?,couponsTitle=?");
+    $sorguCoupons->execute([$usersListele["id"],5, $random,"Diamond Coupon"]);
+
+    header('Location: ./adminCoupons.php');
+}
+
+
+
 
 
 

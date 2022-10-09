@@ -39,7 +39,11 @@
                 <td>
                     <form method="post" action="./adminControls.php">
                     <input type="hidden" name="id" value="<?php echo $orders['id']?>">
-                    <div class="form-floating">
+                        <input type="hidden" name="urunID" value="<?php echo $orders['urunID']?>">
+
+                        <input type="hidden" name="kacAdetUrun" value="<?php echo $orders['kacAdetUrun']?>">
+
+                        <div class="form-floating">
                         <select name = "siparisDurumu" class="form-select" id="floatingSelect" aria-label="Floating label select example">
                             <option selected disabled><?php echo $orders['durumu']?></option>
                             <option value="Siparis Onaylandi" >Sipariş Onaylandı</option>

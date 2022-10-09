@@ -110,7 +110,64 @@
                 </form>
             </div>
         </div>
+        <div class="card text-center  col-5 ms-5">
+            <div class="card-header">
+                Sepetinde Ürün Unutanlar
+            </div>
+            <div class="card-body">
+                <table class="table table-sm mt-2">
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Cart Sum</th>
+                        <th scope="col">Operation</th>
+                    </tr>
+                    </thead>
+                    <!-- HTML Admin Tablo Başlıklar Bitiş -->
+                    <tbody class="table-group-divider">
+                    <!-- Admin Tablo Verileri Veritabanından Alma Başlangıç -->
+                    <?php
+                    $sorguUsers = $conn->query("SELECT * FROM users");
+                    $usersListele = $sorguUsers -> fetchall();
 
+                    foreach ($usersListele as $user) {
+                        $sumOfCard=0;
+                        $sorguCard = $conn->prepare("SELECT * FROM card WHERE whoBuy=? ");
+                        $sorguCard ->execute([$user["id"]]);
+                        $numberOfRow = $sorguCard -> rowCount();
+                        if($numberOfRow > 0) {
+                            $cardListele = $sorguCard->fetchall();
+                            foreach ($cardListele as $card) {
+                                $sumOfCard += $card["price"];
+                            }
+                    ?>
+                    <tr>
+                        <form method="POST" action="./adminControls.php">
+                            <td><input type="hidden" name="id" value="<?php echo $user['id']?>"><?php echo $user['id']?></td>
+                            <td><?php echo $sumOfCard ." TL" ?></td>
+                            <?php
+                            $sorguCoupons = $conn->prepare(" SELECT * FROM userscoupons WHERE whoUser=? and couponsTitle=?");
+                            $sorguCoupons ->execute([$user["id"],"Diamond Coupon"]);
+                            $numberOfRow2 = $sorguCoupons -> rowCount();
+                            if($numberOfRow2 == 0){
+                            $couponsListele = $sorguCoupons -> fetch();
+                            ?>
+                            <td><input class="btn btn-info text-light" type="submit" name="getCouponForCart" value="Get Coupon"></td>
+                                <?php }else{ ?>
+
+                                <td>This user has a <b>diamond Coupon</b></td>
+                        </form>
+                    </tr>
+                            <?php } } } ?>
+
+
+
+                    </tbody>
+                    <!-- Admin Tablo Verileri Veritabanından Alma Bitiş -->
+                </table>
+
+            </div>
+        </div>
     </div>
 </div>
 </div>
