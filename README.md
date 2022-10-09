@@ -6,7 +6,7 @@ Güney Marmara Kalkınma Ajansı, Balıkesir Teknokent, Balıkesir Ticaret Odas�
 
 * :package: **Sipariş işlemleri :** Admin  **eticaretProjesi** admin panelininde siparişlerin detaylı bilgisini görüntüleyebilir,iptal edebilir,sipariş durumunu güncelleyebilirken sepetinde ürün unutan kullanıcılara özel indirim kuponu oluşturabilir.
 
-* :pencil2:	**Ürün işlemleri:** Admin **eticaretProjesi** admin paneli ile sitede kullanıcılara gösterilen ürünlerin adını,resmini,fiyatını,stok durumunu görüntüleyebilir,güncelleyebilir,yeni ürün ekleyebilir.
+* :pencil2:	**Ürün işlemleri :** Admin **eticaretProjesi** admin paneli ile sitede kullanıcılara gösterilen ürünlerin adını,resmini,fiyatını,stok durumunu görüntüleyebilir,güncelleyebilir,yeni ürün ekleyebilir.
 
 * :man: **Kullanıcı İşlemleri :** Admin  **eticaretProjesi** admin panelininde kullanıcıların detaylı bilgisine ulaşabilir,güncelleyebilir ve silebilir.
 
@@ -34,3 +34,9 @@ C -- false --> F[Kullanıcı sayfası]
 <a href="https://www.php.net" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40"/> </a>
 <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a>
 <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/></a> </p>
+
+## 5 - Kurulum
+
+* [XAMPP](https://www.apachefriends.org/tr/) programını kurunuz.
+* [MySQL](http://localhost/phpmyadmin/) adresine giderek kodline adında bir veritabanı açarak [kodline]() sql dosyasını içe aktarınız.
+* [Localhost](http://localhost/login.php) sayfasına giderek projeye giriş yapabilirsiniz.
