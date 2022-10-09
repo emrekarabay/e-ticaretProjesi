@@ -12,6 +12,10 @@ Güney Marmara Kalkınma Ajansı, Balıkesir Teknokent, Balıkesir Ticaret Odas�
 
 ## 2 - Kullanıcı Rolü
 
+* :package: **Sipariş işlemleri :** Kullanıcı  **eticaretProjesi**  aracılığı ile geçmiş siparişlerin detaylı bilgisini görüntüleyebilir,iptal edebilir,sipariş durumunu görüntüleyebilir ayrıca indirim kuponlarını görüntüleyebilir,siparişlerinde kullanabilir.
+
+* :1234: **Puanlama İşlemleri :** Kullanıcı **eticaretProjesi** aracılığı satın aldığı ürüne puan verebilir.
+
 ## 3 - Siteye Giriş Akış Şeması
 
 ```mermaid
