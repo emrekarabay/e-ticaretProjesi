@@ -13,21 +13,12 @@
             color: orange;
         }
     </style>
+    <script type="text/javascript" src="app.js"></script>
 </head>
 <body>
 <div>
 <?php require "../HTML/navbar.php" ?>
 </div>
-<?php if(isset($_GET["addToCart"])) {
-    if($_GET["addToCart"]== "yes"){
-        ?>
-        <div class="alert alert-success alert-dismissible fade show m-3" role="alert">
-            Added to Cart
-            <form method="post" action="./userControls.php">
-            <button type="submit" class="btn-close" data-bs-dismiss="alert" aria-label="Close" name="closeAlertAddToCart"></button>
-            </form>
-        </div>
-    <?php }}?>
 
 <?php require "userCartRight.php"?>
 <!-- İçerik Başlangıç -->
