@@ -2,15 +2,19 @@ Güney Marmara Kalkınma Ajansı, Balıkesir Teknokent, Balıkesir Ticaret Odas�
 
 ## 1 - Admin Rolü 
 
-* :moneybag: **Ciro İşlemleri :** Admin **eticaretProjesi** admin paneli ile tamamlanan ve bekleyen şipariş sayısını bununla birlikte gerçekleşen cirosunu ve beklenen ciro miktarını **Dashboard** sekmesinde görebilir.
+* :moneybag: **Ciro İşlemleri :** Admin **eticaretProjesi** admin paneli ile tamamlanan ve bekleyen şipariş sayısını bununla birlikte gerçekleşen ciro ve beklenen ciro miktarını görebilir.
 
-* :package: **Sipariş işlemleri :** Admin  **eticaretProjesi** admin panelinindeki **Orders** sekmesinde siparişlerin detaylı bilgisini görüntüleyebilirken ayrıca iptal edebilir ve sipariş durumunu güncelleyebilir. 
+* :package: **Sipariş işlemleri :** Admin  **eticaretProjesi** admin panelininde siparişlerin detaylı bilgisini görüntüleyebilir,iptal edebilir,sipariş durumunu güncelleyebilirken sepetinde ürün unutan kullanıcılara özel indirim kuponu oluşturabilir.
 
-* :pencil2:	**Ürün işlemleri:** Admin **eticaretProjesi** admin paneli ile sitede kullanıcılara gösterilen ürünlerin adını,resmini,fiyatını,stok durumunu **Products** sekmesinde görüntüleyebilir,güncelleyebilir.
+* :pencil2:	**Ürün işlemleri :** Admin **eticaretProjesi** admin paneli ile sitede kullanıcılara gösterilen ürünlerin adını,resmini,fiyatını,stok durumunu görüntüleyebilir,güncelleyebilir,yeni ürün ekleyebilir.
 
-* :man: **Kullanıcı İşlemleri :** Admin  **eticaretProjesi** admin panelinindeki **Customers** sekmesinde kullanıcıların detaylı bilgisine ulaşabilir,güncelleyebilir ve silebilir.
+* :man: **Kullanıcı İşlemleri :** Admin  **eticaretProjesi** admin panelininde kullanıcıların detaylı bilgisine ulaşabilir,güncelleyebilir ve silebilir.
 
 ## 2 - Kullanıcı Rolü
+
+* :package: **Sipariş işlemleri :** Kullanıcı  **eticaretProjesi**  aracılığı ile geçmiş siparişlerin detaylı bilgisini görüntüleyebilir,iptal edebilir,sipariş durumunu görüntüleyebilir ayrıca indirim kuponlarını görüntüleyebilir,siparişlerinde kullanabilir.
+
+* :1234: **Puanlama İşlemleri :** Kullanıcı **eticaretProjesi** aracılığı satın aldığı ürüne puan verebilir.
 
 ## 3 - Siteye Giriş Akış Şeması
 
@@ -30,3 +34,9 @@ C -- false --> F[Kullanıcı sayfası]
 <a href="https://www.php.net" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/php/php-original.svg" alt="php" width="40" height="40"/> </a>
 <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a>
 <a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/></a> </p>
+
+## 5 - Kurulum
+
+* [XAMPP](https://www.apachefriends.org/tr/) programını kurunuz.
+* [MySQL](http://localhost/phpmyadmin/) adresine giderek kodline adında bir veritabanı açarak [kodline]() sql dosyasını içe aktarınız.
+* [Localhost](http://localhost/login.php) sayfasına giderek projeye giriş yapabilirsiniz.
