@@ -48,10 +48,10 @@
         <td><img src="<?php echo $card["photoUrl"]?>" width="100px" height="75px"></td>
         <td><?php echo $card["title"] ?></td>
         <td>
-            <form method="post" action="./userControls.php">
+            <form method="post" id="myForm" name="myForm" action="./userControls.php">
                 <input type="hidden" name="id" value="<?php echo $card['id'] ?>">
                 <input type="hidden" name="urunID" value="<?php echo $card['urunID'] ?>">
-                <input type="number" class="form-control" style="width: 75px;" name="howManyProduct" value="<?php echo $card['kacAdetUrun']?>">
+                <input type="number" id="howManyProduct" class="form-control" style="width: 75px;" name="howManyProduct" value="<?php echo $card['kacAdetUrun']?>">
             </form>
         </td>
         <td><?php echo $card['price'] . " TL"?></td>

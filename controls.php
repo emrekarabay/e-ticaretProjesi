@@ -18,7 +18,7 @@ if(isset($_POST["loginButton"])){
         if($usersListele['adminLevel'] == "1" && $usersListele['authLevel'] == "1"){
             header('Location: ./admin/adminDashboard.php');
         }elseif($usersListele['adminLevel'] == "0" && $usersListele['authLevel'] == "1"){
-            header('Location: ./user/userProducts.php');
+            header('Location: ./user/userProducts.php?category=all');
         }else{
             header('Location: ./auth.php');
         }

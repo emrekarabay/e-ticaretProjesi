@@ -13,21 +13,32 @@
             color: orange;
         }
     </style>
-    <script type="text/javascript" src="app.js"></script>
 </head>
 <body>
 <div>
 <?php require "../HTML/navbar.php" ?>
 </div>
 
-<?php require "userCartRight.php"?>
+<?php require "userCartRight.php" ?>
+
+<?php require "javascript.php" ?>
 <!-- İçerik Başlangıç -->
 <div class="container">
 <div class="row">
     <?php
-    $sorguUsers = $conn->query(" select * from letgo ");
-    $usersListele = $sorguUsers -> fetchall();
-
+    if(isset($_GET["category"])){
+        if($_GET["category"] != "all") {
+            $sorguUsers = $conn->prepare(" select * from letgo WHERE category=?");
+            $sorguUsers->execute([$_GET["category"]]);
+            $usersListele = $sorguUsers->fetchall();
+        }elseif($_GET["category"] == "all"){
+            $sorguUsers = $conn->query(" select * from letgo  ");
+            $usersListele = $sorguUsers->fetchall();
+        }
+    }elseif(isset($_GET["add"])) {
+            $sorguUsers = $conn->query(" select * from letgo");
+            $usersListele = $sorguUsers->fetchall();
+    }
 
     $sorguUsers2 = $conn-> prepare(" select * from users  WHERE id=?");
     $sorguUsers2 -> execute([$_SESSION['id']]);

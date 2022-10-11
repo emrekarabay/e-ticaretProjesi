@@ -23,7 +23,7 @@ if(isset($_POST["addToCard"])){
         $sorguCard3 = $conn->prepare(" UPDATE card SET kacAdetUrun = ? WHERE urunID=?");
         $sorguCard3 -> execute([$cardListele["kacAdetUrun"]+1,$_POST["addToCard"]]);
     }
-    header('Location: ./userProducts.php');
+    header('Location: ./userProducts.php?add=yes&category='. $productListele["category"]);
 }
 
 if(isset($_POST["howManyProduct"])){
@@ -36,7 +36,7 @@ if(isset($_POST["howManyProduct"])){
 
     if($usersListele["stock"] >= $_POST["howManyProduct"]){
         $sorguUsers5 ->execute([$_POST["howManyProduct"],$_POST["id"]]);
-        header('Location: ./userCard.php');
+        header('Location: ./userCard.php?hata=no');
     }else{
         $sorguUsers5 ->execute([$usersListele["stock"],$_POST["id"]]);
         header('Location: ./userCard.php?hata=yes');
